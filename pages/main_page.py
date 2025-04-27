@@ -1,23 +1,17 @@
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from locators.main_page_locators import TestMainPageLocators
 from pages.base_page import BasePage
-from constants import Constants
+from urls import DZEN_URL
 
 
 class MainPageScooter(BasePage):
 
     @allure.step('Скролл до блока "Вопросы о важном"')
     def scroll_to_faq(self):
-        locator = TestMainPageLocators.FAQ_QUESTION_8
-        element = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(locator))
-        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+        self.scroll_to_element(TestMainPageLocators.FAQ_QUESTION_8)
 
     @allure.step('Нажатие на вопрос')
     def click_the_question(self, question_locator):
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(question_locator))
         self.click_on_element(question_locator)
 
     @allure.step('Получение текста ответа')
@@ -31,7 +25,7 @@ class MainPageScooter(BasePage):
         self.find_element_with_wait(TestMainPageLocators.LOGO_YANDEX)
         self.click_on_element(TestMainPageLocators.LOGO_YANDEX)
         self.switch_to_next_tab()
-        self.wait_url_to_be(Constants.DZEN_URL)
+        self.wait_url_to_be(DZEN_URL)
 
     @allure.step('Нажатие на логотип "Самокат"')
     def click_logo_open_home_page(self):

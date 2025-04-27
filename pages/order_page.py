@@ -4,7 +4,6 @@ from pages.base_page import BasePage
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import datetime
-from selenium.webdriver.common.by import By
 
 class OrderPage(BasePage):
 
@@ -30,6 +29,7 @@ class OrderPage(BasePage):
         self.click_on_element(TestOrderPageLocators.SELECTED_STATION)
         return self
 
+    @allure.step('Проверка выбранной станции метро: {station}')
     def check_metro_value(self, station):
         field = self.find_element_with_wait(TestOrderPageLocators.METRO_STATION_INPUT)
         expected_value = station
@@ -77,11 +77,12 @@ class OrderPage(BasePage):
             EC.visibility_of_element_located(TestOrderPageLocators.RENTAL_DURATION_LIST))
         self.click_on_element(TestOrderPageLocators.DROPDOWN_ITEM_RENTAL_PERIOD)
 
-
+    @allure.step('Выбор серого цвета самоката')
     def set_color_field(self):
         self.click_on_element(TestOrderPageLocators.CHECKBOX_GREY)
         return self
 
+    @allure.step('Ввод комментария в поле "Комментарий для курьера": {comment}')
     def set_comment_field(self, comment):
         self.set_text_to_elm(TestOrderPageLocators.COMMENT_FIELD, comment)
         return self
@@ -125,3 +126,7 @@ class OrderPage(BasePage):
         self.set_comment_field(comment)
         self.click_order_button()
         self.check_displaying_of_confirm_window()
+
+    @allure.step('Проверка отображения попапа об успешном заказе')
+    def is_order_confirmation_displayed(self):
+        return self.check_displaying_of_element(TestOrderPageLocators.POP_UP_COMPLETE_ORDER)

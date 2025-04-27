@@ -24,6 +24,7 @@ class BasePage:
     @allure.step('Кликнуть на элемент с локатором: {locator}')
     def click_on_element(self, locator):
         element = self.find_element_with_wait(locator)
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
         element.click()
 
     @allure.step('Ввести значение в поле ввода с локатором: {locator}')
@@ -43,3 +44,7 @@ class BasePage:
     @allure.step('Проверить отображение элемента с локатором: {locator}')
     def check_displaying_of_element(self, locator):
         return self.find_element_with_wait(locator).is_displayed()
+
+    @allure.step('Получить текущий URL')
+    def get_current_url(self):
+        return self.driver.current_url

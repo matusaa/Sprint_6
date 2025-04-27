@@ -1,14 +1,13 @@
 import pytest
 from selenium import webdriver
-from constants import Constants
 from pages.main_page import MainPageScooter
-from pages.order_page import OrderPage
+from urls import URL
 
 @pytest.fixture(scope="function")
 def driver():
     browser = webdriver.Firefox()
     browser.maximize_window()
-    browser.get(Constants.URL)
+    browser.get(URL)
     yield browser
     browser.quit()
 
@@ -17,8 +16,3 @@ def home_page(driver):
     home_page = MainPageScooter(driver)
     home_page.close_cookie_window()
     return home_page
-
-@pytest.fixture
-def order_page(driver):
-    order_page = OrderPage(driver)
-    return order_page

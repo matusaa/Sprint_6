@@ -1,8 +1,4 @@
 class Constants:
-    URL = 'https://qa-scooter.praktikum-services.ru/'
-    URL_ORDER = 'https://qa-scooter.praktikum-services.ru/order'
-    DZEN_URL = 'https://dzen.ru/?yredirect=true'
-
     expected_texts = {
         'faq1': 'Сутки — 400 рублей. Оплата курьеру — наличными или картой.',
         'faq2': 'Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать '

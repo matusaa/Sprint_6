@@ -3,6 +3,7 @@ import allure
 from locators.main_page_locators import TestMainPageLocators
 from constants import Constants
 from conftest import driver, home_page
+from urls import DZEN_URL, URL
 
 
 class TestMainPageScooter:
@@ -28,13 +29,13 @@ class TestMainPageScooter:
 
     @allure.title('Тест нажатия на надпись "Яндекс" в логотипе')
     @allure.description('Проверка открытия сайта Яндекс.Дзен при нажатии на логотип "Яндекс"')
-    def test_click_yandex_logo_navigates_to_dzen(self, driver, home_page):
+    def test_click_yandex_logo_navigates_to_dzen(self, home_page):
         home_page.click_logo_yandex_open_dzen_page()
-        assert driver.current_url == Constants.DZEN_URL
+        assert home_page.get_current_url() == DZEN_URL
 
     @allure.title('Тест нажатия на надпись "Самокат" в логотипе')
     @allure.description('Проверка перехода на главную страницу при нажатии на логотип "Самокат"')
-    def test_click_samokat_logo_opens_homepag(self, driver, home_page):
+    def test_click_samokat_logo_opens_homepag(self, home_page):
         home_page.click_order_button_header()
         home_page.click_logo_open_home_page()
-        assert driver.current_url == Constants.URL
+        assert home_page.get_current_url() == URL
